@@ -12,7 +12,15 @@ type geometry interface {
 
 type geometryDisplayType interface {
 	geometry
-	display() string
+	Display()
+}
+
+type stddisplay struct {
+	Name string
+}
+
+func (d stddisplay) Display() {
+	fmt.Println("-- Type -- ", d.Name)
 }
 
 type rect struct {
@@ -21,7 +29,7 @@ type rect struct {
 
 type displayForRect struct {
 	rect
-	displaytype string
+	stddisplay
 }
 
 type circle struct {
@@ -30,7 +38,7 @@ type circle struct {
 
 type displayForCircle struct {
 	circle
-	displaytype string
+	stddisplay
 }
 
 func (r rect) area() float64 {
@@ -41,20 +49,12 @@ func (r rect) perim() float64 {
 	return 2*r.width + 2*r.heigth
 }
 
-func (r displayForRect) display() string {
-	return r.displaytype
-}
-
 func (c circle) area() float64 {
 	return math.Pi * c.radius * c.radius
 }
 
 func (c circle) perim() float64 {
 	return 2 * math.Pi * c.radius
-}
-
-func (c displayForCircle) display() string {
-	return c.displaytype
 }
 
 func measure(g geometry) {
@@ -64,18 +64,20 @@ func measure(g geometry) {
 }
 
 func measureWithDisplay(g geometryDisplayType) {
-	fmt.Println(g.display())
-	fmt.Println(g)
-	fmt.Println(g.area())
-	fmt.Println(g.perim())
+	g.Display()
+	// fmt.Println(g)
+	fmt.Println("Area: ", g.area())
+	fmt.Println("Perimeter : ", g.perim())
 }
 
 func main() {
 	r := rect{width: 3, heigth: 4}
+	rDisplay := stddisplay{Name: ": Rectangle "}
 	c := circle{radius: 5}
+	cDisplay := stddisplay{Name: ": Circle "}
 
-	rdisplay := displayForRect{rect: r, displaytype: "Rectangle:  "}
-	cdisplay := displayForCircle{circle: c, displaytype: "Circle:  "}
+	rdisplay := displayForRect{rect: r, stddisplay: rDisplay}
+	cdisplay := displayForCircle{circle: c, stddisplay: cDisplay}
 
 	measureWithDisplay(rdisplay)
 	measureWithDisplay(cdisplay)
