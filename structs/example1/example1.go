@@ -11,7 +11,7 @@ type Point struct {
 	Y int
 }
 
-// PointThree represent a three dimentional in space
+// PointThree represent a three dimensional in space
 type PointThree struct {
 	Point
 	Z int
