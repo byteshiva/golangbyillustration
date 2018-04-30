@@ -4,9 +4,6 @@ go:
   - go1.10.x
   - tip
 
-before_install:
-  - go get -t -v ./...
-
 script:
   - ./go.test.sh
 
