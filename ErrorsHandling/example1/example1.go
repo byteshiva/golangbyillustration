@@ -19,8 +19,7 @@ func (e *errorString) Error() string {
 	return e.s
 }
 
-// http://golang.org/src/pkg/errors/errors.go
-// New returns an error that formats as the given text.
+// New returns an error that formats as the given text. http://golang.org/src/pkg/errors/errors.go
 func New(text string) error {
 	return &errorString{text}
 }

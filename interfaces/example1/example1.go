@@ -28,6 +28,6 @@ func main() {
 
 	// Display information about the user value that was stored.
 	v := reflect.ValueOf(i)
-	fmt.Printf("Kind: %v\t Type: %v\t\t NumFields: %v\n", v.Kind, v.Type(), v.NumField())
+	fmt.Printf("Kind: %v\t Type: %v\t\t NumFields: %v\n", v.Kind(), v.Type(), v.NumField())
 
 }
